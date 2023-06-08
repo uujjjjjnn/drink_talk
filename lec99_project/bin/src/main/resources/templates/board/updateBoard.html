@@ -32,17 +32,16 @@
 
 <div class="container mt-4 ml-auto mr-auto">
 	<form th:action="@{/updateBoard}" method="post">
-	<!-- 	<input type="hidden" name="member_id" class="form-control" th:value="${session.member.id}">  -->
-		<input type="hidden" name="seq" class="form-control" th:value="${board.seq}">
+		<input type="hidden" name="writer" class="form-control" th:value="${session.member.id}">
 		
 		<div class="row">
 		<div class="col-md-2" >말머리 선택
 			<select name="contentType">
-				<option name="contentType" th:text="${board.contentType}" selected readonly></option>
+				<option name="contentType" th:text="${board.contentType}"></option>
             </select>
         </div>
         <div class="col-md-10">		
- 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="title" th:value="${board.title}"  readonly>
+ 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="title" th:value="${board.title}">
 		</div>
 		<div class="col-md-12">
 			<hr />
@@ -50,12 +49,11 @@
 		</div>
 		<div class="col-md-12">
 			<hr />
-			<input type="text" name="uploadFile" th:value="${board.fileName}"  readonly/>
+			<input type="file" name="uploadFile" th:value="${board.fileName}"/>
 		</div>
 		<div class="col-md-12" align="right">
 			<br />
 			<a th:href="@{/getBoardList}" class="btn btn-outline-dark">목록가기</a>
-			<input type="text" th:text="${member.id}"/>
 			<input th:if="${session.member.id != board.memberNick ? 'disabled' : ''}" type="submit" class="btn btn-success" value="수정" />
 		</div>
 		</div>
