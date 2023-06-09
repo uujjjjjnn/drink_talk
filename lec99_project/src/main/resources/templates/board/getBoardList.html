@@ -24,9 +24,11 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-        <a class="nav-link" th:href="@{login}">자유게시판</a>
-        <a class="nav-link" th:href="@{login}">마이페이지</a>
-        <a class="nav-link" th:href="@{/getMemberList}">관리자페이지</a>
+        <a class="nav-link" th:href="@{/getBoardList}">자유게시판</a>
+        <a class="nav-link" th:href="@{/getMemberList}">마이페이지</a>
+        <th:block th:if="${member.role=='ADMIN'}">
+	        <a class="nav-link" th:href="@{/getMemberList}">관리자페이지</a>
+        </th:block>
       </div>
     </div>
   </div>

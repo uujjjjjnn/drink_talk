@@ -37,8 +37,8 @@
 		<div class="row">
 		<div class="col-md-2" >말머리 선택
 			<select name="contentType">
-				<option name="contentType">일반</option>
-				<option name="contentType" th:if="${session.member.role == 'ADMIN'}">공지</option>
+				<option name="contentType" th:value="일반">일반</option>
+				<option name="contentType" th:if="${session.member.role == 'ADMIN'}" th:value="공지">공지</option>
             </select>
         </div>
         <div class="col-md-10">		
@@ -50,7 +50,8 @@
 		</div>
 		<div class="col-md-12">
 			<hr />
-			<input type="file" name="uploadFile"/>
+			<!-- <input type="file" name="uploadFile"/> -->
+			<input type="file" name="file"/> 
 		</div>
 		<div class="col-md-12" align="right">
 			<br />

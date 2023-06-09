@@ -23,8 +23,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-        <a class="nav-link" th:href="@{login}">자유게시판</a>
-        <a class="nav-link" th:href="@{login}">마이페이지</a>
+        <a class="nav-link" th:href="@{/getBoardList}">자유게시판</a>
+        <a class="nav-link" th:href="@{/getMemberInfo}">마이페이지</a>
       </div>
     </div>
   </div>
@@ -71,10 +71,15 @@
 		      		<span style="background:none;font-size:1em">&#128444;</span>
 			      	</th:block>
 		      </td> -->
-		      	<td th:text="${member.nick}"></td>
+		      	<td><a th:href="@{/updateMember(id=${member.id})}" th:text="${member.nick}"></a></td>
 		      	<td th:text="${member.name}"></td>
 		      	<td th:text="${member.region}"></td>
-		      	<td th:text="${member.role}"></td>
+		      	<td>
+		      	<th:block th:if="${member.role == 'ADMIN'}">
+		      		<span style="backgroune:none;font-size:1em;">&#128150;</span>
+		      	</th:block>
+			    <span th:text="${member.role}"></th>
+		      	</td>
 		    </tr>
 		  </tbody>
 		</table>

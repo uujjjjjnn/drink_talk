@@ -14,4 +14,7 @@ public interface BoardService {
 	void updateBoard(Board board);
 	void deleteBoard(Board board);
 	int updateReadCount(Board board);
+	
+	void deleteBoard(Long seq);
+	Board getBoard(Long seq);
 }

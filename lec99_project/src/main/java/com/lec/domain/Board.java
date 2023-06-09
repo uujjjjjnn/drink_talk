@@ -68,5 +68,6 @@ public class Board {
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Comment> commentList = new ArrayList<>();
 
+
 	
 }

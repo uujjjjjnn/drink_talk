@@ -43,12 +43,16 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void updateBoard(Board board) {
+		
 		Board findBoard = boardRepository.findById(board.getSeq()).get();
 		
 		findBoard.setTitle(board.getTitle());
 		findBoard.setContent(board.getContent());
 		findBoard.setContentType(board.getContentType());
-		findBoard.setUploadFile(board.getUploadFile());
+
+	    findBoard.setUploadFile(board.getUploadFile());
+	    findBoard.setFileName(board.getFileName());
+
 		boardRepository.save(board);
 	}
 
@@ -66,4 +70,19 @@ public class BoardServiceImpl implements BoardService {
 	public long getTotalRowCount(Board board) {
 		return boardRepository.count();
 	}
+
+
+	@Override
+	public Board getBoard(Long seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteBoard(Long seq) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

@@ -14,27 +14,27 @@
   <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="validationDefault01" align="left">아이디</label>
-      <input type="text" class="form-control" id="validationDefault01" name="id" th:text="${member.id}">
+      <input type="text" class="form-control" id="validationDefault01" name="id" th:value="${member.id}" readonly>
     </div>
     <div class="col-md-6 mb-3">
       <label for="validationDefault02">비밀번호</label>
-      <input type="text" class="form-control" id="validationDefault01" name="password" th:text="${member.password}">
+      <input type="text" class="form-control" id="validationDefault01" name="password" th:value="${member.password}">
     </div>
   </div> 
   <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="validationDefault03">이름</label>
-      <input type="text" class="form-control" id="validationDefault02" name="name" th:text="${member.name}">
+      <input type="text" class="form-control" id="validationDefault02" name="name" th:value="${member.name}">
     </div>
     <div class="col-md-6 mb-3">
       <label for="validationDefault04">닉네임</label>
-      <input type="text" class="form-control" id="validationDefault03" name="nick" th:text="${member.nick}">
+      <input type="text" class="form-control" id="validationDefault03" name="nick" th:value="${member.nick}">
     </div>
     </div>
     <div class="form-row">
     <div class="col-md-6 mb-3">
       <label for="validationDefault05">연락처</label>
-      <input type="text" class="form-control" id="validationDefault05" name="tel" th:text="${member.tel}">
+      <input type="text" class="form-control" id="validationDefault05" name="tel" th:value="${member.tel}">
     </div>
     <div class="col-md-6 mb-3">
       <label for="validationDefault06">지역</label>
@@ -55,14 +55,14 @@
       <label for="validationDefault07">주요 활동</label>
       <select class="custom-select" id="validationDefault04" name="role">
         <option selected disabled name="role" th:text="${member.role}"></option>
-        <option name="role" value="SELLER">판매</option>
-        <option name="role" value="BUYER">소비</option>      
+        <option name="role" value="SELLER">SELLER</option>
+        <option name="role" value="BUYER">BUYER</option>      
       </select>
     </div>
   </div>
-  <button class="btn btn-outline-success"><a th:href="@{/getMemberList}">회원목록</a></button>
-  <button class="btn btn-success"><a th:href="@{updateMember}">회원수정</a></button>
-	
+  <a th:href="@{/getMemberList}" class="btn btn-outline-success">회원목록</a>
+  <input type="submit" class="btn btn-success" value="회원수정" />
+  <a th:href="@{/deleteMember(id=${member.id})}" class="btn btn-danger">회원삭제</a>
 </form>
 	</div>
 </body>

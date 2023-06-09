@@ -83,11 +83,24 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("updateMember")
+	public String updateMember(Member member, Model model) {
+		model.addAttribute("member", memberService.getMember(member));
+		return "member/updateMember";
+	}
+	
+	@PostMapping("updateMember")
+	public String updateMember(Member member) {
+		memberService.updateMember(member);
+		return "redirect:getMemberList";
+	}
 	
 	
-	
-//	@GetMapping("getMember")
-//	@GetMapping("updateMember")
-//	@GetMapping("deleteMember")
+	@GetMapping("deleteMember")
+	public String deleteMember(Member member) {
+		
+		memberService.deleteMember(member);
+		return "forward:getMemberList";
+	}
 
 }
