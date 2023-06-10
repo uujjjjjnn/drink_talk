@@ -11,22 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lec.domain.Board;
 
 public interface BoardRepository extends CrudRepository<Board, Long> {
-	
-	@Modifying
-	@Transactional
-	@Query("update Board b set b.cnt = b.cnt + 1 where b.seq = :seq")
-	int updateReadCount(@Param("seq") Long seq);
-	
-	/*
-	 * @Modifying
-	 * 
-	 * @Transactional
-	 * 
-	 * @Query("update Board b set b.board_ref = b.seq,")
-	 */
-	
 
-	Page<Board> findByTitleContaining(String title, Pageable pageable);
-	Page<Board> findByMemberIdContaining(String memberId, Pageable pageable);
-	Page<Board> findByContentContaining(String content, Pageable pageable);
+	@Modifying
+    @Transactional
+    @Query("update Board b set b.cnt = b.cnt + 1 where b.seq = :seq")
+    int updateReadCount(@Param("seq")Long seq);
+
+    Page<Board> findByTitleContaining(String title, Pageable pageable);
+    Page<Board> findByMemberIdContaining(String memberId, Pageable pageable);
+    Page<Board> findByContentContaining(String content, Pageable pageable);
+	
+	
+	
 }

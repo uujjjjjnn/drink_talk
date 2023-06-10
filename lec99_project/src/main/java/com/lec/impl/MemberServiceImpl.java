@@ -15,16 +15,16 @@ import com.lec.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberRepository memberRepository;
-
+	private MemberRepository memberRepo;
+	
 	@Override
 	public long getTotalRowCount(Member member) {
-		return memberRepository.count();
+		return memberRepo.count();
 	}
 
 	@Override
 	public Member getMember(Member member) {
-		Optional<Member> findMember = memberRepository.findById(member.getId());
+		Optional<Member> findMember = memberRepo.findById(member.getId());
 		if(findMember.isPresent())
 			return findMember.get();
 		else return null;
@@ -32,30 +32,26 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Page<Member> getMemberList(Pageable pageable, String searchType, String searchWord) {
-		if(searchType.equalsIgnoreCase("nick")) {
-			return memberRepository.findByNickContaining(searchWord, pageable);
-		} else if(searchType.equalsIgnoreCase("role")) {
-			return memberRepository.findByRoleContaining(searchWord, pageable);
+		if(searchType.equalsIgnoreCase("id")) {
+			return memberRepo.findByIdContaining(searchWord, pageable);
 		} else {
-			return memberRepository.findByRegionContaining(searchWord, pageable);
+			return memberRepo.findByNameContaining(searchWord, pageable);
 		}
 	}
 
 	@Override
 	public void insertMember(Member member) {
-		memberRepository.save(member);
+		memberRepo.save(member);
 	}
 
 	@Override
 	public void updateMember(Member member) {
-		memberRepository.save(member);
+		memberRepo.save(member);
 	}
 
 	@Override
 	public void deleteMember(Member member) {
-		memberRepository.deleteById(member.getId());
+		memberRepo.deleteById(member.getId());		
 	}
-	
 
-	
 }

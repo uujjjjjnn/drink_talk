@@ -31,16 +31,11 @@
 </nav> <!-- navibar -->
 
 <div class="container mt-4 ml-auto mr-auto">
-	<form action="insertBoard" method="post" enctype="multipart/form-data">
+	<form th:action="insertBoard" method="post">
 		<input type="hidden" name="memberId" class="form-control" th:value="${session.member.id}">
 		
 		<div class="row">
-		<div class="col-md-2" >말머리 선택
-			<select name="contentType">
-				<option name="contentType" th:value="일반">일반</option>
-				<option name="contentType" th:if="${session.member.role == 'ADMIN'}" th:value="공지">공지</option>
-            </select>
-        </div>
+		
         <div class="col-md-10">		
  		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="title" placeholder="제목을 입력하세요.">
 		</div>
@@ -48,11 +43,7 @@
 			<hr />
 	  		<textarea class="form-control" id="exampleFormControlTextarea1" rows="20" name="content" placeholder="내용을 입력하세요."></textarea>
 		</div>
-		<div class="col-md-12">
-			<hr />
-			<!-- <input type="file" name="uploadFile"/> -->
-			<input type="file" name="file"/> 
-		</div>
+		
 		<div class="col-md-12" align="right">
 			<br />
 			<a th:href="@{/getBoardList}" class="btn btn-outline-dark">목록가기</a>

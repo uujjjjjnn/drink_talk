@@ -11,8 +11,7 @@
 </head>
 <body>
 <div class="container" th:align="center">
-	<h3>게시판목록</h3>
-	<h5><font class="bg bg-dark text-white" th:text="|${session['member'].name}(${session.member.id})|"></font>님 환영합니다</h5>
+	<h3>내 기록</h3>
 </div>
 <!-- navibar -->
 <nav class="navbar navbar-expand-lg bg-light">
@@ -25,25 +24,20 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
         <a class="nav-link" th:href="@{/getBoardList}">자유게시판</a>
-        <a class="nav-link" th:href="@{/getItemList}">마이페이지</a>
-        <!-- 
-        <th:block th:if="${member.role=='ADMIN'}">
-	        <a class="nav-link" th:href="@{/getMemberList}">관리자페이지</a>
-        </th:block> 
-         -->
+        <a class="nav-link" th:href="@{/getMemberInfo}">마이페이지</a>
       </div>
     </div>
   </div>
 </nav> <!-- navibar -->
 
 <div class="container mt-4 ml-auto mr-auto">
-	<form action="login" method="get">
+	<form action="getItemList" method="get">
 	<div class="row mt-3 justify-content-center">
 		<div class="col-auto me-1">
 			<select class="form-select" name="searchType" id="searchType">
 				<option value="" disabled>검색</option>
-				<option value="title" th:selected="${st} == 'title'">글제목</option>	
-				<option value="content" th:selected="${st} == 'content'">글내용</option>	
+				<option value="id" th:selected="${st} == 'id'">상품명</option>	
+				<option value="type" th:selected="${st} == 'type'">주종</option>	
 			</select>		
 		</div>
 		<div class="col-3 me-1">
@@ -52,31 +46,55 @@
 		<div class="col-5 bm-10">
 			<input type="reset" class="btn btn-outline-warning me-2" value="초기화" />&nbsp;&nbsp;
 			<input type="submit" class="btn btn-outline-success me-2" value="Search" />&nbsp;&nbsp;
-			<a th:href="insertBoard" class="btn btn-success">글등록</a>
+			<a th:href="insertItem" class="btn btn-success">기록하기</a>
 		</div>
 	</div>
 		<table class="table">
 		  <thead class="thead-dark">
 		    <tr>
-		      <th scope="col">글번호</th>
-		      <th scope="col">제목</th>
-		      <th scope="col">작성자</th>
-		      <th scope="col">등록일</th>
-		      <th scope="col">조회수</th>
+		      <th scope="col">주종</th>
+		      <th scope="col">상품명</th>
+		      <th scope="col">도수</th>
+		      <th scope="col">단맛</th>
+		      <th scope="col">청량감</th>
+		      <th scope="col">바디감</th>
+		      <th scope="col">신맛</th>
+		      <th scope="col">만족도</th>
+		      <th scope="col">한 줄 평가</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <tr th:each="board, state : ${pagedResult.getContent()}">
-		      <th th:text="${board.seq}"></th>
-		      <td><a th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a></td>
-		      	<td th:text="${board.member.name}"></td>
-		      	<td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
-		      <td>
-		      	<th:block th:if="${board.cnt ge 30}">
-			      	<span style="background:none;font-size:1em">&#128293;</span>
+		    <tr th:each="item, state : ${pagedResult.getContent()}">
+		      <th th:text="${item.type}"></th>
+<!-- 		      <td>
+		      	<span th:if="${board.contentType == '공지'}" style="background:none;font-size:1em">&#128204;</span>
+		      	<a th:if="${board.contentType == '공지'}" th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a>
+		      	<a th:if="${board.contentType != '공지'}" th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a>	
+		      		<th:block th:if="${not #strings.isEmpty(board.fileName)}">
+		      		<span style="background:none;font-size:1em">&#128444;</span>
+			      	</th:block>
+		      </td> -->
+		      	<td><a th:href="@{/updateItem(id=${item.id})}" th:text="${item.id}"></a></td>
+		      	<td th:text="${item.degree}"></td>
+		      	<td th:text="${item.flavorSweet}"></td>
+		      	<td th:text="${item.flavorPop}"></td>
+		      	<td th:text="${item.flavorBody}"></td>
+		      	<td th:text="${item.flavorSour}"></td>
+		      	<td>
+		      	<th:block th:if="${item.score ge 4}">
+			      	<span style="background:none;font-size:1em">&#128150;</span>
 		      	</th:block>
-		      		<span th:text="${board.cnt}"></span>
+		      		<span th:text="${item.score}"></span>
 		      </td>
+		      	<td th:text="${item.comment}"></td>
+		      	<!-- 
+		      	<td>
+		      	<th:block th:if="${member.role == 'ADMIN'}">
+		      		<span style="backgroune:none;font-size:1em;">&#128150;</span>
+		      	</th:block>
+			    <span th:text="${member.role}"></th>
+		      	</td>
+		      	 -->
 		    </tr>
 		  </tbody>
 		</table>
