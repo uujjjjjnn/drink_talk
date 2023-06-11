@@ -14,44 +14,42 @@
 
 	
 	<div class="container" align="center">
-		<div class="mt-4 p-5 bg-success text-white rounded">
-			<h3>사용자정보</h3>
-		<!-- 	<h5><font class="bg bg-danger" th:text="|${session['member'].name}(${session.member.id})|"></font>님 환영합니다!!</h5>  -->
-			<h5><font class="bg bg-danger" th:text="|${session['member'].name}(${session.member.memberId})|"></font>님 환영합니다!!</h5>
-		</div>
-	</div>
-	
-	
-	<div class="container col-3 mt-4">
-		<form>
-			<div class="col-2 input-group mb-3">
-				<div class="input-group-text"><i class="fas fa-user"></i></div>
-				<input type="text" name="memberId" class="form-control" th:value="${ session.member.getMemberId() }" disabled>
-			</div>
-			<div class="col-2 input-group mb-3">
-				<div class="input-group-text"><i class="fas fa-address-book"></i></div>
-				<input type="text" name="name" class="form-control" th:value="${ session.member.getName() }" disabled>
-			</div>
-			<div class="col-2 input-group mb-3">
-				<div class="input-group-text"><i class="fas fa-address-book"></i></div>
-				<input type="text" name="gender" class="form-control" th:value="${ session.member.getGender() }" disabled>
-			</div>
-			<div class="col-2 input-group mb-3">
-				<div class="input-group-text"><i class="fas fa-address-book"></i></div>
-				<input type="text" name="age" class="form-control" th:value="${ session.member.getAge() }" disabled>
-			</div>
+			<div style="margin-top:110px;" vertical-align="middle">
 			
-		</form>			
-	</div>	
+			<div class="wrapper" text-align="center" style="padding-top:50px;width:600px; height:500px; border:solid 3px; border-radius:10%;">
+            <div style="height:90px;">
+			<h1><font color="green" th:text="|${session['member'].name}(${session.member.memberId})|"></font>님 환영합니다!!</h1>
+            </div>
+		<!-- 	<h5><font class="bg bg-danger" th:text="|${session['member'].name}(${session.member.id})|"></font>님 환영합니다!!</h5>  -->
 		
-	<div class="container" align="center">	
-		<a th:href="logout" class="btn btn-primary mt-3">logout</a>
-		<!-- <th:block th:if="${member.getRole().toUpperCase() == 'ADMIN' }" >
-        	<a th:href="getMemberList" class="btn btn-primary mt-3">사용자목록보기</a>
-        </th:block> -->
-		<a th:href="getBoardMyList" class="btn btn-primary mt-3">내 게시글 보기</a>
-		<a th:href="getBoardList" class="btn btn-primary mt-3">게시판</a>
-	</div>	
+	
+	
+           <div>
+    <div class="col-md-8 mb-2">
+      <input type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="memberId" th:value="${ session.member.getMemberId() }" readonly>
+    </div>
+    <div class="col-md-8 mb-2">
+      <input type="password" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;"name="password" th:value="${ session.member.getPassword() }" readonly>
+    </div>
+    <div class="col-md-8 mb-2">
+      <input type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="name" th:value="${ session.member.getName() }" readonly>
+    </div>
+    <div class="col-md-8 mb-2">
+      <input type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="gender" th:value="${ session.member.getGender() }" readonly>
+    </div>
+    <div class="col-md-8 mb-2">
+      <input type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="age" th:value="${ session.member.getAge() }" readonly>
+    </div>
+<div class="col-md-12">
+	<div style="width:100px;height:50px;font-size:1em;border-radius:10%;border:solid black;">
+		<a th:href="getBoardMyList"  >나혼자<br>주절주절</a>
+		<a th:href="getBoardList"  >다같이<br>주절주절</a>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 	
 </body>
 </html>		
