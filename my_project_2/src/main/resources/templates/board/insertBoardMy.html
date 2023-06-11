@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<title>주절..&#127866; 주절...&#128172;</title>
+</head>
+<body>
+<div class="container" th:align="center">
+	<h3>게시글 등록</h3>
+</div>
+<!-- navibar -->
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" th:href="@{login}">자유게시판</a>
+        <a class="nav-link" th:href="@{login}">마이페이지</a>
+      </div>
+    </div>
+  </div>
+</nav> <!-- navibar -->
+
+<div class="container mt-4 ml-auto mr-auto">
+	<form th:action="insertBoardMy" method="post">
+		<input type="hidden" name="memberId" class="form-control" th:value="${session.member.memberId}">
+		
+		<div class="row">
+		
+        <div class="col-md-4">		
+ 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="type" placeholder="주종을 입력하세요.">
+		</div>
+        <div class="col-md-4">		
+ 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="상품명을 입력하세요.">
+		</div>
+        <div class="col-md-4">		
+ 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="degree" placeholder="도수를 입력하세요.">
+		</div>
+    <div class="col-md-6">
+      <label for="validationDefault02">단맛</label>
+      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="flavorSweet" value="" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault02">청량감</label>
+      <input type="number" step="0.1" min="0" max="5"class="form-control" id="validationDefault01" name="flavorPop" value="" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault02">바디감</label>
+      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="flavorBody" value="" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault02">신맛</label>
+      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="flavorSour" value="" required>
+    </div>
+    <div class="col-md-12">
+      <label for="validationDefault02">만족도</label>
+      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="score" value="" required>
+    </div>
+    <div class="col-md-12">
+      <label for="validationDefault02">한 줄 평가</label>
+      <input type="text" class="form-control" id="validationDefault01" name="comment" value="" required>
+    </div>
+		
+		<div class="col-md-12" align="right">
+			<br />
+			<a th:href="@{/getBoardMyList}" class="btn btn-outline-dark">목록가기</a>
+			<input type="submit" class="btn btn-success" value="등록" />
+		</div>
+		</div>
+	</form>
+</body>
+</html>
