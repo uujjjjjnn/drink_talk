@@ -41,10 +41,9 @@ public class BoardServiceImpl implements BoardService {
 	public Page<Board> getBoardList(Pageable pageable, String searchType, String searchWord) {
 		if(searchType.equalsIgnoreCase("type")) {
 			return boardRepo.findByTypeContaining(searchWord, pageable);
-		} else if(searchType.equalsIgnoreCase("score")) {
-			return boardRepo.findByScoreContaining(searchWord, pageable);
-		} else {
-			return boardRepo.findByCommentContaining(searchWord, pageable);
+		}
+		else {
+			return boardRepo.findByItemNameContaining(searchWord, pageable);
 		}
 	}
 

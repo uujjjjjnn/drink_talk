@@ -11,66 +11,85 @@
 </head>
 <body>
 <div class="container" th:align="center">
-	<h3>게시글 등록</h3>
+<div class="mt-4 p-3 mb-3 bg-success text-white rounded">
+	<h3>다같이 주절..<span style="background:none;">&#127866;</span>주절...<span style="background:none;">&#128491;</span></h3>
+	<h5><font class="bg bg-light text-dark" th:text="|${session.member.name}(${session.member.MemberId})|"></font>님 환영하주</h5>
 </div>
-<!-- navibar -->
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" th:href="@{login}">자유게시판</a>
-        <a class="nav-link" th:href="@{login}">마이페이지</a>
+
+<!-- nav -->
+<ul class="nav nav-tabs nav-fills nav-justified">
+  <li class="nav-item">
+    <span style="font-size:1.1em">&#127866;&#128172;&#127866;&#128172;</span>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" style="color:black;" th:href="@{/getMemberInfo}">시크릿주주</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " style="color:black;" th:href="@{/getBoardList}">다같이 주절주절</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" style="color:black;" th:href="@{/getBoardMyList}">나혼자 주절주절</a>
+  </li>
+  <th:block th:if="${member.memberId=='admin'}">
+    <li class="nav-item">
+    <a class="nav-link" style="color:black;" th:href="@{/getMemberList}">관리자페이지</a>
+  </li>
+  </th:block>
+  <li class="nav-item">
+    <a class="nav-link" style="color:black;" th:href="@{/logout}">떠나주</a>
+  </li>
+</ul>
+<!-- nav -->
+
+<div class="container" align="center">
+	<form th:action="insertBoard" method="post">
+		<input type="hidden" name="memberId" class="form-control" th:value="${session.member.memberId}">
+		<div class="wrapper" text-align="center" style="padding-top:60px;">
+		<div >
+      <div class="form-row">
+      <div class="col-md-3 mb-4">
+      <select name="type" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;">
+      <option name="type" th:text="주종" disabled selected></option>
+      <option name="type" th:value="맥주">맥주</option>
+      <option name="type" th:value="막걸리">막걸리</option>
+      <option name="type" th:value="소주">소주</option>
+      <option name="type" th:value="와인">와인</option>
+      <option name="type" th:value="기타">기타</option>
+      </select>
+		</div>
+	  <div class="col-md-3 ">
+      <input placeholder="상품명" type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="itemName" value="" required>
+    </div>
+     <div class="col-md-3 ">
+      <input placeholder="도수" type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="degree" value="" required>
+    </div>
+     <div class="col-md-3 ">
+      <input placeholder="만족도 (0~5)" type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="score" value="" required>
+    </div>
+		</div>
+		
+	  <div class="form-row">
+      
+    <div class="col-md-3 mb-5">
+      <input placeholder="단맛 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorSweet" value="" required>
+    </div>
+    <div class="col-md-3 mb-5">
+      <input placeholder="청량감 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorPop" value="" required>
+    </div>
+      
+    <div class="col-md-3 mb-5">
+      <input placeholder="바디감 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorBody" value="" required>
+    </div>
+    <div class="col-md-3 mb-5">
+      <input placeholder="신맛 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorSour" value="" required>
       </div>
     </div>
-  </div>
-</nav> <!-- navibar -->
 
-<div class="container mt-4 ml-auto mr-auto">
-	<form th:action="insertBoardMy" method="post">
-		<input type="hidden" name="memberId" class="form-control" th:value="${session.member.memberId}">
-		
-		<div class="row">
-		
-        <div class="col-md-4">		
- 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="type" placeholder="주종을 입력하세요.">
-		</div>
-        <div class="col-md-4">		
- 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="상품명을 입력하세요.">
-		</div>
-        <div class="col-md-4">		
- 		 	<input type="text" class="form-control" id="exampleFormControlInput1" name="degree" placeholder="도수를 입력하세요.">
-		</div>
-    <div class="col-md-6">
-      <label for="validationDefault02">단맛</label>
-      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="flavorSweet" value="" required>
-    </div>
-    <div class="col-md-6">
-      <label for="validationDefault02">청량감</label>
-      <input type="number" step="0.1" min="0" max="5"class="form-control" id="validationDefault01" name="flavorPop" value="" required>
-    </div>
-    <div class="col-md-6">
-      <label for="validationDefault02">바디감</label>
-      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="flavorBody" value="" required>
-    </div>
-    <div class="col-md-6">
-      <label for="validationDefault02">신맛</label>
-      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="flavorSour" value="" required>
-    </div>
-    <div class="col-md-12">
-      <label for="validationDefault02">만족도</label>
-      <input type="number" step="0.1" min="0" max="5" class="form-control" id="validationDefault01" name="score" value="" required>
-    </div>
-    <div class="col-md-12">
-      <label for="validationDefault02">한 줄 평가</label>
-      <input type="text" class="form-control" id="validationDefault01" name="comment" value="" required>
+    <div class="col-md-12 mt-2">
+      <textarea name="comment" rows="10" class="form-control" placeholder="술술 입력하시주" style="border:solid 3px black;"></textarea>
     </div>
 		
-		<div class="col-md-12" align="right">
+		<div class="col-md-12" align="center">
 			<br />
 			<a th:href="@{/getBoardMyList}" class="btn btn-outline-dark">목록가기</a>
 			<input type="submit" class="btn btn-success" value="등록" />

@@ -23,7 +23,7 @@ public class Board {
 	
 	private String type;
 	
-	private String name;
+	private String itemName;
 	
 	private Double degree;
 	

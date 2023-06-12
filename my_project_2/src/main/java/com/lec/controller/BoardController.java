@@ -204,7 +204,7 @@ public class BoardController {
 		}
 		
 		boardService.updateBoard(board);
-		return "forward:getBoardListMy";
+		return "forward:getBoardMyList";
 	}
 
 	@GetMapping("/deleteBoard")

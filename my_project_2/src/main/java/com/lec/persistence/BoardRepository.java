@@ -24,7 +24,6 @@ public interface BoardRepository extends CrudRepository<Board, Long> {
 
 	
 	Page<Board> findByTypeContaining(String type, Pageable pageable);
-    Page<Board> findByScoreContaining(String score, Pageable pageable);
-    Page<Board> findByCommentContaining(String comment, Pageable pageable);
+    Page<Board> findByItemNameContaining(String itemName, Pageable pageable);
 
 }
