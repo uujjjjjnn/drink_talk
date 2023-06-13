@@ -16,5 +16,6 @@ public interface BoardService {
 	void deleteBoard(Board board);
 	int updateReadCount(Board board);
 	int incrementMemberCnt(Member member);
+	Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord);
 	
 }

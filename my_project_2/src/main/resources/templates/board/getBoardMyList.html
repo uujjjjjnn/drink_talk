@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <style>
- .gr {
+.gr {
  	color: green;
+	text-decoration-line:none;
  }
- .a {
+.a {
 	font-size:1.3em; 
 	width:240px;
 	height:30px;
 	border: none; 
 	border-bottom: solid 3px black;
 	text-align: center;
+}
+.page-item:first-child .page-linkk {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+   
+}
+.page-item.active .page-linkk {
+	z-index: 3;
+    color: #fff;
+	background-color: #198754;
+    border: #198754;
+    border-radius:50%
+}
+.page-linkk {
+	color: #198754;
+	padding: 0.375rem 0.75rem;
+}
+.page-linkk {
+    position: relative;
+    display: block;
+    color: #198754;
+    text-decoration: none;
+    background-color: #fff;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 </style>
 <head>
@@ -59,7 +84,7 @@
 <!-- nav -->
 
 <div class="container mt-4 ml-auto mr-auto">
-	<form action="getBoardListMy" method="get" id="boardForm">   
+	<form action="getBoardMyList" method="get" id="boardForm">   
 			<input type="hidden" id="curPage" name="curPage"  th:value="0">
 			<input type="hidden" id="rowSizePerPage" name="rowSizePerPage" th:value="${rp}">
 	<div class="row mt-3 justify-content-center">
@@ -127,23 +152,24 @@
 </div>
 
 		<div class="row align-items-start mt-3">
-		<ul class="col-10 btn-sm pagination justify-content-center">	
+		<div class="col"></div>
+		<ul class="col-10 btn-sm pagination justify-content-center" >	
 				<th:block th:if="${sp != 1 }">
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=0, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-link"><i class="fas fa-fast-backward"></i></a></li>
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=${sp-ps}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-link"><i class="fas fa-backward"></i></a></li>				
+					<li class="page-item"><a th:href="@{/getBoardMyList(curPage=0, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk"><i class="fas fa-fast-backward"></i></a></li>
+					<li class="page-item"><a th:href="@{/getBoardMyList(curPage=${sp-ps}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-backward"></i></a></li>				
 				</th:block>
 				
  				<th:block th:each="page : ${#numbers.sequence(pagingInfo.getStartPage(), pagingInfo.getEndPage())}">
-					<li class="page-item" th:classappend="${(page-1)==pagingInfo.getCurPage() ? 'active' : ''}"><a class="page-link" th:href="@{/getBoardList(curPage=${page-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" th:text="${page}" ></a></li>
+					<li class="page-item" th:classappend="${(page-1)==pagingInfo.getCurPage() ? 'active' : ''}"><a class="page-linkk" th:href="@{/getBoardMyList(curPage=${page-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" th:text="${page}"  ></a></li>
 				</th:block>	
 				
 				<th:block th:if="${ ep lt tp }">
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=${ep}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-link"><i class="fas fa-forward"></i></a></li>				
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=${tp-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-link"><i class="fas fa-fast-forward"></i></a></li>				
+					<li class="page-item"><a th:href="@{/getBoardMyList(curPage=${ep}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-forward"></i></a></li>				
+					<li class="page-item"><a th:href="@{/getBoardMyList(curPage=${tp-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-fast-forward"></i></a></li>				
 				</th:block>	
 			</ul> <!-- pagination -->
 			
-			<div class="col-auto ">
+			<div class="col-auto me-1">
 				<div class="input-group mb-3">
 					<span class="input-group-text"><i class="fas fa-list"></i></span>
 					<select class="col-auto form-select" id="rowPerPage" name="rowPerPage">

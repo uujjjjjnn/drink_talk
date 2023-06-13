@@ -76,4 +76,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepo.incrementMemberCnt(member.getMemberId());
 	}
 
+	@Override
+	public Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord) {
+		if(searchType.equalsIgnoreCase("type")) {
+			return boardRepo.findByTypeContaining(searchWord, pageable);
+		}
+		else {
+			return boardRepo.findByItemNameContaining(searchWord, pageable);
+		}
+	}
+
 }

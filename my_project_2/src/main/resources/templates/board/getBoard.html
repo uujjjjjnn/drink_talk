@@ -81,7 +81,7 @@
       <input type="text" class="a" name="itemName" th:attr="value=${board.getItemName()}" readonly>
     </div>
      <div class="col-md-3 ">
-      <input type="text" class="a" name="degree" th:attr="value=${board.getDegree() + ' %'}" readonly>
+      <input type="text" class="a" name="degree" th:attr="value=${board.getDegree() + ' %'}" required>
     </div>
      <div class="col-md-3 ">
       <input type="text" class="a" name="score" th:attr="value='만족도 : ' + ${board.getScore()} + ' / 5'" required>
@@ -112,7 +112,7 @@
 			<br />
 			<a th:href="@{/getBoardList}" class="btn btn-outline-dark">목록가기</a>
 			<th:block th:if="${session['member'].memberId eq board.member['memberId']}">
-    <input type="submit" class="btn btn-success" value="수정" />
+    <input type="submit" class="btn btn-warning" value="수정" />
 			<a th:href="@{/deleteBoard(seq=${board.seq})}" class="btn btn-danger">삭제</a>
 
 </th:block>

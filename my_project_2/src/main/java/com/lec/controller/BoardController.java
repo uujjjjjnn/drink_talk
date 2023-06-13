@@ -40,6 +40,7 @@ public class BoardController {
 	
 	public PagingInfo pagingInfo = new PagingInfo();
 	
+	
 	@Value("${path.upload}")
 	public String uploadFolder;
 	
