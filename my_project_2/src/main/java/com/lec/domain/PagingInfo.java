@@ -1,5 +1,9 @@
 package com.lec.domain;
 
+import java.util.List;
+
+import com.lec.service.BoardService;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,5 +36,17 @@ public class PagingInfo {
 		startPage=(curPage-1)/pageSize*pageSize+1;
 		endPage=startPage+pageSize-1;
 		if(endPage>totalPageCount) endPage=totalPageCount;			
+	}
+
+	public void useridPagingSetting(String userid, int rowSizePerPage) {
+
+	    //userid로 boardlist 가져오기
+	    List<Board> boardlist = BoardService.getBoardListByUserid(userid, rowSizePerPage);
+
+	    //총 레코드 수 계산
+	    totalRowCount = boardlist.size();
+
+	    //페이지 설정
+	    pageSetting();
 	}
 }

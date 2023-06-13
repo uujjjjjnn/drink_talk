@@ -29,7 +29,7 @@ import com.lec.domain.PagingInfo;
 import com.lec.service.BoardService;
 
 @Controller
-@SessionAttributes({"member", "pagingInfo"})
+@SessionAttributes({"member", "pagingInfo","pagingInfo2"})
 public class BoardController {
 	
 	@Autowired
@@ -38,8 +38,11 @@ public class BoardController {
 	@Autowired
 	private Environment environment;
 	
-	public PagingInfo pagingInfo = new PagingInfo();
+	@Autowired
+	private HttpServletRequest session;
 	
+	public PagingInfo pagingInfo = new PagingInfo();
+	public PagingInfo pagingInfo2 = new PagingInfo();
 	
 	@Value("${path.upload}")
 	public String uploadFolder;
@@ -90,33 +93,34 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoardMyList")
-	public String getBoardMyList(Model model,
+	public String getBoardMyList(Model model, HttpServletRequest session,
 			@RequestParam(defaultValue="0") int curPage,
 			@RequestParam(defaultValue="10") int rowSizePerPage,
 			@RequestParam(defaultValue="type") String searchType,
 			@RequestParam(defaultValue="") String searchWord) {   			
-		
+		/*
 		Pageable pageable = PageRequest.of(curPage, rowSizePerPage, Sort.by("seq").descending());
-		Page<Board> pagedResult = boardService.getBoardList(pageable, searchType, searchWord);
+		Page<Board> pagedResult = boardService.getBoardMyList(pageable, searchType, searchWord);
 		
 		int totalRowCount  = pagedResult.getNumberOfElements();
+		
 		int totalPageCount = pagedResult.getTotalPages();
-		int pageSize       = pagingInfo.getPageSize();
+		int pageSize       = pagingInfo2.getPageSize();
 		int startPage      = curPage / pageSize * pageSize + 1;
 		int endPage        = startPage + pageSize - 1;
 		endPage = endPage > totalPageCount ? (totalPageCount > 0 ? totalPageCount : 1) : endPage;
 		
-		pagingInfo.setCurPage(curPage);
-		pagingInfo.setTotalRowCount(totalRowCount);
-		pagingInfo.setTotalPageCount(totalPageCount);
-		pagingInfo.setStartPage(startPage);
-		pagingInfo.setEndPage(endPage);
-		pagingInfo.setSearchType(searchType);
-		pagingInfo.setSearchWord(searchWord);
-		pagingInfo.setRowSizePerPage(rowSizePerPage);
-		model.addAttribute("pagingInfo", pagingInfo);
+		pagingInfo2.setCurPage(curPage);
+		pagingInfo2.setTotalRowCount(totalRowCount);
+		pagingInfo2.setTotalPageCount(totalPageCount);
+		pagingInfo2.setStartPage(startPage);
+		pagingInfo2.setEndPage(endPage);
+		pagingInfo2.setSearchType(searchType);
+		pagingInfo2.setSearchWord(searchWord);
+		pagingInfo2.setRowSizePerPage(rowSizePerPage);
+		model.addAttribute("pagingInfo2", pagingInfo2);
 		
-		model.addAttribute("pagedResult", pagedResult);
+		model.addAttribute("pagedResult2", pagedResult);
 		model.addAttribute("pageable", pageable);
 		model.addAttribute("cp", curPage);
 		model.addAttribute("sp", startPage);
@@ -127,6 +131,41 @@ public class BoardController {
 		model.addAttribute("st", searchType);
 		model.addAttribute("sw", searchWord);			
 		return "board/getBoardMyList";
+		*/
+		
+		//userid로 페이징 설정
+		pagingInfo2.useridPagingSetting(session.getAttribute("member.memberId").toString(), rowSizePerPage);
+
+		//boardlist 가져오기
+		Pageable pageable = PageRequest.of(curPage, rowSizePerPage, Sort.by("seq").descending());
+		Page<Board> pagedResult = boardService.getBoardMyList(pageable, searchType, searchWord);
+
+		//총 레코드 수 계산
+		int totalRowCount = pagedResult.getNumberOfElements();
+
+		//페이지 설정
+		pagingInfo2.pageSetting();
+
+		//model에 페이징 정보 설정
+		model.addAttribute("pagingInfo2", pagingInfo2);
+
+		//model에 boardlist 설정
+		model.addAttribute("pagedResult2", pagedResult);
+
+		//model에 curPage 설정
+		model.addAttribute("cp", curPage);
+
+		//model에 rowSizePerPage 설정
+		model.addAttribute("rp", rowSizePerPage);
+
+		//model에 searchType 설정
+		model.addAttribute("st", searchType);
+
+		//model에 searchWord 설정
+		model.addAttribute("sw", searchWord);
+
+		return "board/getBoardMyList";
+		
 	}
 
 	@GetMapping("/insertBoard")

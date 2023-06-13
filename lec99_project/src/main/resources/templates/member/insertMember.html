@@ -12,21 +12,54 @@
 		<form action="insertMember" method="post" border="2" >
 	<h1 style="height:100px">회원가입</h1>
   <div class="form-row">
-    <div class="col-md-12">
+    <div class="col-md-6 mb-3">
       <label for="validationDefault01" align="left">아이디</label>
       <input type="text" class="form-control" id="validationDefault01" name="id" value="" required>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6 mb-3">
       <label for="validationDefault02">비밀번호</label>
       <input type="password" class="form-control" id="validationDefault01" name="password" value="" required>
     </div>
   </div>
   <div class="form-row">
-    <div class="col-md-12">
+    <div class="col-md-6 mb-3">
       <label for="validationDefault03">이름</label>
       <input type="text" class="form-control" id="validationDefault02" name="name" value="" required>
     </div>
-    
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault04">닉네임</label>
+      <input type="text" class="form-control" id="validationDefault03" name="nick" required>
+    </div>
+    </div>
+    <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault05">연락처</label>
+      <input type="text" class="form-control" id="validationDefault05" name="tel" required placeholder="(예) 010-1234-5678">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault06">지역</label>
+      <select class="custom-select" id="validationDefault04" name="region" required>
+        <option selected disabled value="">현재 살고있는 지역을 선택하세요</option>
+        <option name="region" value="답십리동">답십리동</option>
+        <option name="region" value="용신동">용신동</option>
+        <option name="region" value="이문동">이문동</option>
+        <option name="region" value="장안동">장안동</option>
+        <option name="region" value="전농동">전농동</option>
+        <option name="region" value="제기동">제기동</option>
+        <option name="region" value="청량리동">청량리동</option>
+        <option name="region" value="회기동">회기동</option>
+        <option name="region" value="휘경동">휘경동</option>
+      </select>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault07">주요 활동</label>
+      <select class="custom-select" id="validationDefault04" name="role" required>
+        <option selected disabled value="">판매/소비</option>
+        <option name="role" value="SELLER">판매</option>
+        <option name="role" value="BUYER">소비</option>
+      </select>
+    </div>
+  </div>
   <div class="form-group">
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>

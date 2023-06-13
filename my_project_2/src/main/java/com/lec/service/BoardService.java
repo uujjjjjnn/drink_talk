@@ -1,5 +1,7 @@
 package com.lec.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,5 +19,9 @@ public interface BoardService {
 	int updateReadCount(Board board);
 	int incrementMemberCnt(Member member);
 	Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord);
+	static List<Board> getBoardListByUserid(String userid, int rowSizePerPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

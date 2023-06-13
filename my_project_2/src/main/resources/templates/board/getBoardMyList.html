@@ -124,7 +124,7 @@
 		  <!-- 
 		    <tr th:each="board, state : ${pagedResult.getContent()}">
 		     -->
-		     <tr th:each="board, state : ${pagedResult.getContent()}" th:if="${session.member.memberId eq board.member.memberId}">
+		     <tr th:each="board, state : ${pagedResult2.getContent()}" th:if="${session.member.memberId eq board.member.memberId}">
 		      <td></td>
 		      <td th:text="${board.type}"></td>
 		      <th><a class="gr" th:href="@{/getBoardMy(seq=${board.seq})}" th:text="${board.itemName}"></a></th>
@@ -159,8 +159,8 @@
 					<li class="page-item"><a th:href="@{/getBoardMyList(curPage=${sp-ps}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-backward"></i></a></li>				
 				</th:block>
 				
- 				<th:block th:each="page : ${#numbers.sequence(pagingInfo.getStartPage(), pagingInfo.getEndPage())}">
-					<li class="page-item" th:classappend="${(page-1)==pagingInfo.getCurPage() ? 'active' : ''}"><a class="page-linkk" th:href="@{/getBoardMyList(curPage=${page-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" th:text="${page}"  ></a></li>
+ 				<th:block th:each="page : ${#numbers.sequence(pagingInfo2.getStartPage(), pagingInfo2.getEndPage())}">
+					<li class="page-item" th:classappend="${(page-1)==pagingInfo2.getCurPage() ? 'active' : ''}"><a class="page-linkk" th:href="@{/getBoardMyList(curPage=${page-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" th:text="${page}"  ></a></li>
 				</th:block>	
 				
 				<th:block th:if="${ ep lt tp }">

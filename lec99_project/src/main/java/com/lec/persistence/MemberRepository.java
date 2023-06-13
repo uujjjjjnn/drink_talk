@@ -1,29 +1,19 @@
 package com.lec.persistence;
 
-import javax.persistence.EntityManager;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.lec.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
 
-/*	
-	public static Member findMemberWithBoardListAndItemList(String memberId) {
-		
-		EntityManager entityManager = null;
-		
-        return entityManager.createQuery(
-            "SELECT DISTINCT m FROM Member m " +
-            "LEFT JOIN FETCH m.boardList " +
-            "LEFT JOIN FETCH m.itemList " +
-            "WHERE m.id = :memberId", Member.class)
-            .setParameter("memberId", memberId)
-            .getSingleResult();
-    }
-*/	
-	Page<Member> findByIdContaining(String id, Pageable pageable);
-	Page<Member> findByNameContaining(String name, Pageable pageable);
+	Page<Member> findByNickContaining(String nick, Pageable pageable);
+	Page<Member> findByRoleContaining(String role, Pageable pageable);
+	Page<Member> findByRegionContaining(String region, Pageable pageable);
+	Optional<Member> findByNick(String id);
+
 }

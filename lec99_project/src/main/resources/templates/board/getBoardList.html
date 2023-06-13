@@ -12,7 +12,7 @@
 <body>
 <div class="container" th:align="center">
 	<h3>게시판목록</h3>
-	<h5><font class="bg bg-dark text-white" th:text="|${session['member'].name}(${session.member.id})|"></font>님 환영합니다</h5>
+	<h5><font class="bg bg-dark text-white" th:text="|${session['member'].nick}(${session.member.id})|"></font>님 환영합니다</h5>
 </div>
 <!-- navibar -->
 <nav class="navbar navbar-expand-lg bg-light">
@@ -25,12 +25,10 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
         <a class="nav-link" th:href="@{/getBoardList}">자유게시판</a>
-        <a class="nav-link" th:href="@{/getItemList}">마이페이지</a>
-        <!-- 
+        <a class="nav-link" th:href="@{/getMemberList}">마이페이지</a>
         <th:block th:if="${member.role=='ADMIN'}">
 	        <a class="nav-link" th:href="@{/getMemberList}">관리자페이지</a>
-        </th:block> 
-         -->
+        </th:block>
       </div>
     </div>
   </div>
@@ -43,6 +41,7 @@
 			<select class="form-select" name="searchType" id="searchType">
 				<option value="" disabled>검색</option>
 				<option value="title" th:selected="${st} == 'title'">글제목</option>	
+				<option value="memberNick" th:selected="${st} == 'memberNick'">작성자</option>	
 				<option value="content" th:selected="${st} == 'content'">글내용</option>	
 			</select>		
 		</div>
@@ -68,9 +67,16 @@
 		  <tbody>
 		    <tr th:each="board, state : ${pagedResult.getContent()}">
 		      <th th:text="${board.seq}"></th>
-		      <td><a th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a></td>
-		      	<td th:text="${board.member.name}"></td>
-		      	<td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
+		      <td>
+		      	<span th:if="${board.contentType == '공지'}" style="background:none;font-size:1em">&#128204;</span>
+		      	<a th:if="${board.contentType == '공지'}" th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a>
+		      	<a th:if="${board.contentType != '공지'}" th:href="@{/getBoard(seq=${board.seq})}" th:text="${board.title}"></a>	
+		      		<th:block th:if="${not #strings.isEmpty(board.fileName)}">
+		      		<span style="background:none;font-size:1em">&#128444;</span>
+			      	</th:block>
+		      </td>
+		      	<td th:text="${board.member.nick}"></td>
+		      	<td th:text="${board.createDate}"></td>
 		      <td>
 		      	<th:block th:if="${board.cnt ge 30}">
 			      	<span style="background:none;font-size:1em">&#128293;</span>
