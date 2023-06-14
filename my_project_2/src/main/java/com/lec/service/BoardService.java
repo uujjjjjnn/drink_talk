@@ -18,10 +18,10 @@ public interface BoardService {
 	void deleteBoard(Board board);
 	int updateReadCount(Board board);
 	int incrementMemberCnt(Member member);
-	Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord);
-	static List<Board> getBoardListByUserid(String userid, int rowSizePerPage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord);
+	//List<Board> getBoardByListMemberId(String memberId);
+	//List<Board> getBoardByListMemberId(Member member);
+	Page<Board> getBoardMyListbyMemberId(Pageable pageable, String searchType, String searchWord, Member member);
+
 	
 }

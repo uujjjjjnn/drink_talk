@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lec.domain.Board;
+import com.lec.domain.Member;
 
 public interface BoardRepository extends CrudRepository<Board, Long> {
 
@@ -21,9 +22,16 @@ public interface BoardRepository extends CrudRepository<Board, Long> {
 	@Transactional
 	@Query("update Member m set m.m_cnt = m.m_cnt + 1 where m.memberId = :memberId")
 	int incrementMemberCnt(@Param("memberId") String memberId);
-
+/*
+	@Modifying
+	@Transactional
+	@Query("select b from Board b where b.memberId = :memberId")
+	List<Board> getBoardByListMemberId(@Param("memberId") String memberId);
+*/	
 	
 	Page<Board> findByTypeContaining(String type, Pageable pageable);
     Page<Board> findByItemNameContaining(String itemName, Pageable pageable);
+    Page<Board> findByTypeContainingAndMember(String searchWord, Member member, Pageable pageable);
+
 
 }

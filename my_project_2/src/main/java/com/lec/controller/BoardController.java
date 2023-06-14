@@ -1,5 +1,6 @@
 package com.lec.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -22,18 +23,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lec.domain.Board;
 import com.lec.domain.Member;
 import com.lec.domain.PagingInfo;
 import com.lec.service.BoardService;
+import com.lec.service.MemberService;
 
 @Controller
 @SessionAttributes({"member", "pagingInfo","pagingInfo2"})
 public class BoardController {
 	
 	@Autowired
-	private BoardService boardService;;
+	private BoardService boardService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@Autowired
 	private Environment environment;
@@ -93,14 +99,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/getBoardMyList")
-	public String getBoardMyList(Model model, HttpServletRequest session,
+	public String getBoardMyList(Model model, @ModelAttribute("member") Member member,
 			@RequestParam(defaultValue="0") int curPage,
 			@RequestParam(defaultValue="10") int rowSizePerPage,
 			@RequestParam(defaultValue="type") String searchType,
 			@RequestParam(defaultValue="") String searchWord) {   			
-		/*
+		
 		Pageable pageable = PageRequest.of(curPage, rowSizePerPage, Sort.by("seq").descending());
-		Page<Board> pagedResult = boardService.getBoardMyList(pageable, searchType, searchWord);
+		
+		Member searchMember = new Member();
+		searchMember.setMemberId(member.getMemberId());
+		Page<Board> pagedResult = boardService.getBoardMyListbyMemberId(pageable, searchType, searchWord, searchMember);
 		
 		int totalRowCount  = pagedResult.getNumberOfElements();
 		
@@ -131,40 +140,7 @@ public class BoardController {
 		model.addAttribute("st", searchType);
 		model.addAttribute("sw", searchWord);			
 		return "board/getBoardMyList";
-		*/
-		
-		//userid로 페이징 설정
-		pagingInfo2.useridPagingSetting(session.getAttribute("member.memberId").toString(), rowSizePerPage);
 
-		//boardlist 가져오기
-		Pageable pageable = PageRequest.of(curPage, rowSizePerPage, Sort.by("seq").descending());
-		Page<Board> pagedResult = boardService.getBoardMyList(pageable, searchType, searchWord);
-
-		//총 레코드 수 계산
-		int totalRowCount = pagedResult.getNumberOfElements();
-
-		//페이지 설정
-		pagingInfo2.pageSetting();
-
-		//model에 페이징 정보 설정
-		model.addAttribute("pagingInfo2", pagingInfo2);
-
-		//model에 boardlist 설정
-		model.addAttribute("pagedResult2", pagedResult);
-
-		//model에 curPage 설정
-		model.addAttribute("cp", curPage);
-
-		//model에 rowSizePerPage 설정
-		model.addAttribute("rp", rowSizePerPage);
-
-		//model에 searchType 설정
-		model.addAttribute("st", searchType);
-
-		//model에 searchWord 설정
-		model.addAttribute("sw", searchWord);
-
-		return "board/getBoardMyList";
 		
 	}
 
@@ -181,7 +157,17 @@ public class BoardController {
 	public String insertBoard(@ModelAttribute("member") Member member, Board board) throws IOException {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
-		}	
+		}
+		
+		// 파일업로드
+		MultipartFile uploadFile = board.getUploadFile();
+
+		if(!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File(uploadFolder + fileName));
+			board.setFileName(fileName);
+		}
+		
 		board.setMember(member);
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
@@ -200,7 +186,15 @@ public class BoardController {
 	public String insertBoardMy(@ModelAttribute("member") Member member, Board board) throws IOException {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
-		}	
+		}
+		// 파일업로드
+		MultipartFile uploadFile = board.getUploadFile();
+		if(!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File(uploadFolder + fileName));
+			board.setFileName(fileName);
+		}
+		
 		board.setMember(member);
 		boardService.insertBoard(board);
 		return "redirect:getBoardMyList";

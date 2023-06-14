@@ -45,7 +45,7 @@
 <!-- nav -->
 
 <div class="container" align="center">
-	<form th:action="insertBoard" method="post">
+	<form th:action="insertBoard" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="memberId" class="form-control" th:value="${session.member.memberId}">
 		<div class="wrapper" text-align="center" style="padding-top:60px;">
 		<div >
@@ -91,7 +91,10 @@
     <div class="col-md-12 mt-2">
       <textarea name="comment" rows="10" class="form-control" placeholder="술술 입력하시酒" style="border:solid 3px black;"></textarea>
     </div>
-		
+		<input type="file" name="uploadFile" />
+		<input type="text" name="tag1"/>
+		<input type="text" name="tag2"/>
+		<input type="text" name="tag3"/>
 		<div class="col-md-12" align="center">
 			<br />
 			<a th:href="@{/getBoardList}" class="btn btn-outline-dark">목록가기</a>

@@ -190,20 +190,7 @@ public class BoardController {
 		return "board/updateBoard";
 	}
 */
-	@GetMapping("/updateBoard")
-<<<<<<< HEAD
-	public String updateBoardView(@RequestParam("seq") Long seq, Model model, Board board) {
-	    boardService.getBoard(board);
-=======
-	public String updateBoardView(@RequestParam("seq") Long seq, Model model) {
-	    Board board = boardService.getBoard(seq);
->>>>>>> parent of 18c9f54 (0610 commit)
-	    model.addAttribute("board", board);
-	    return "board/updateBoard";
-	}
 
-	
-	
 	@PostMapping("/updateBoard")
 	public String updateBoard(@ModelAttribute("board") Board board) {
 		boardService.updateBoard(board);

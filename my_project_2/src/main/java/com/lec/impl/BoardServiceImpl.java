@@ -1,5 +1,6 @@
 package com.lec.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -37,10 +38,22 @@ public class BoardServiceImpl implements BoardService {
 		else return null;
 	}
 
+	//게시글 조회
 	@Override
 	public Page<Board> getBoardList(Pageable pageable, String searchType, String searchWord) {
 		if(searchType.equalsIgnoreCase("type")) {
 			return boardRepo.findByTypeContaining(searchWord, pageable);
+		}
+		else {
+			return boardRepo.findByItemNameContaining(searchWord, pageable);
+		}
+	}
+	
+	//현재 세션 유저정보 기준으로 조회
+	@Override
+	public Page<Board> getBoardMyListbyMemberId(Pageable pageable, String searchType, String searchWord, Member member) {
+		if(searchType.equalsIgnoreCase("type")) {
+			return boardRepo.findByTypeContainingAndMember(searchWord, member, pageable);
 		}
 		else {
 			return boardRepo.findByItemNameContaining(searchWord, pageable);
@@ -76,14 +89,19 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepo.incrementMemberCnt(member.getMemberId());
 	}
 
-	@Override
-	public Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord) {
-		if(searchType.equalsIgnoreCase("type")) {
-			return boardRepo.findByTypeContaining(searchWord, pageable);
-		}
-		else {
-			return boardRepo.findByItemNameContaining(searchWord, pageable);
-		}
-	}
+	
+//	@Override
+//	public Page<Board> getBoardMyList(Pageable pageable, String searchType, String searchWord) {
+//		if(searchType.equalsIgnoreCase("type")) {
+//			return boardRepo.findByTypeContaining(searchWord, pageable);
+//		}
+//		else {
+//			return boardRepo.findByItemNameContaining(searchWord, pageable);
+//		}
+//	}
+	
+	//
+
+
 
 }

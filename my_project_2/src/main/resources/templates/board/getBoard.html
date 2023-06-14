@@ -56,10 +56,15 @@
 <!-- nav -->
 
 <div class="container mt-4 ml-auto mr-auto">
-	<form th:action="@{/updateBoard}" method="post">
+	<form th:action="@{/updateBoard}" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="seq" class="form-control" th:value="${board.seq}">
 		<div class="wrapper" text-align="center" style="padding-top:50px;">
 		<div >
+		<div class="row">
+		
+    <p><img th:src="${board.getFileName()}" alt="" /></p>
+</div>
+
 	<div class="row">
         <div class="col-md-4 mb-5">		
  		 	<input type="text" class="a" style="border-bottom:solid 2px gray;" name="name" th:value="${board.member.getName()}" readonly>

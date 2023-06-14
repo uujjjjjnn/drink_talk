@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +39,18 @@ public class Board {
 	
 	@Column(insertable = false, updatable = false, columnDefinition = "bigint default 0")
 	private Long cnt;
+	
+	private String fileName;
+	
+	@Transient
+	private MultipartFile uploadFile;	
+	
+	@Column(columnDefinition = "VARCHAR(255) default ''")
+	private String tag1;
+	@Column(columnDefinition = "VARCHAR(255) default ''")
+	private String tag2;
+	@Column(columnDefinition = "VARCHAR(255) default ''")
+	private String tag3;
 	
 	@ManyToOne
 	@JoinColumn(name="member_id", nullable = false, updatable = false)

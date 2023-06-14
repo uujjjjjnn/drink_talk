@@ -124,7 +124,7 @@
 		  <!-- 
 		    <tr th:each="board, state : ${pagedResult.getContent()}">
 		     -->
-		     <tr th:each="board, state : ${pagedResult2.getContent()}" th:if="${session.member.memberId eq board.member.memberId}">
+		     <tr th:each="board, state : ${pagedResult2.getContent()}">
 		      <td></td>
 		      <td th:text="${board.type}"></td>
 		      <th><a class="gr" th:href="@{/getBoardMy(seq=${board.seq})}" th:text="${board.itemName}"></a></th>
