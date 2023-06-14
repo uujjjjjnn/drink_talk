@@ -32,6 +32,10 @@ public interface BoardRepository extends CrudRepository<Board, Long> {
 	Page<Board> findByTypeContaining(String type, Pageable pageable);
     Page<Board> findByItemNameContaining(String itemName, Pageable pageable);
     Page<Board> findByTypeContainingAndMember(String searchWord, Member member, Pageable pageable);
+    Page<Board> findByItemNameContainingAndMember(String searchWord, Member member, Pageable pageable);
+    Page<Board> findByTag1ContainingOrTag2ContainingOrTag3Containing(String searchWord, String searchWord2, String searchWord3, Pageable pageable);
+    Page<Board> findByTag1ContainingOrTag2ContainingOrTag3ContainingAndMember(String searchWord, String searchWord2, String searchWord3, Member member, Pageable pageable);
+
 
 
 }

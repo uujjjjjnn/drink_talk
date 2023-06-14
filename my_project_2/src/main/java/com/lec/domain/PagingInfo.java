@@ -37,15 +37,4 @@ public class PagingInfo {
 		endPage=startPage+pageSize-1;
 		if(endPage>totalPageCount) endPage=totalPageCount;			
 	}
-
-	/*
-	 * public void useridPagingSetting(String memberId, int rowSizePerPage) {
-	 * 
-	 * //userid로 boardlist 가져오기 List<Board> boardlist =
-	 * BoardService.getBoardByListMemberId();
-	 * 
-	 * //총 레코드 수 계산 totalRowCount = boardlist.size();
-	 * 
-	 * //페이지 설정 pageSetting(); }
-	 */
 }

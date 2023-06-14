@@ -43,9 +43,10 @@ public class BoardServiceImpl implements BoardService {
 	public Page<Board> getBoardList(Pageable pageable, String searchType, String searchWord) {
 		if(searchType.equalsIgnoreCase("type")) {
 			return boardRepo.findByTypeContaining(searchWord, pageable);
-		}
-		else {
+		} else if(searchType.equalsIgnoreCase("itemName")) {
 			return boardRepo.findByItemNameContaining(searchWord, pageable);
+		} else {
+			return boardRepo.findByTag1ContainingOrTag2ContainingOrTag3Containing(searchWord, searchWord, searchWord, pageable);
 		}
 	}
 	
@@ -54,11 +55,13 @@ public class BoardServiceImpl implements BoardService {
 	public Page<Board> getBoardMyListbyMemberId(Pageable pageable, String searchType, String searchWord, Member member) {
 		if(searchType.equalsIgnoreCase("type")) {
 			return boardRepo.findByTypeContainingAndMember(searchWord, member, pageable);
-		}
-		else {
-			return boardRepo.findByItemNameContaining(searchWord, pageable);
+		} else if(searchType.equalsIgnoreCase("itemName")) {
+			return boardRepo.findByItemNameContainingAndMember(searchWord, member, pageable);
+		} else {
+			return boardRepo.findByTag1ContainingOrTag2ContainingOrTag3ContainingAndMember(searchWord, searchWord, searchWord, member, pageable);
 		}
 	}
+			
 
 	@Override
 	public void insertBoard(Board board) {
@@ -68,9 +71,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateBoard(Board board) {
 		Board findBoard = boardRepo.findById(board.getSeq()).get();
-
-		findBoard.setScore(board.getScore());
+		
+		findBoard.setFlavorBody(board.getFlavorBody());
+		findBoard.setFlavorPop(board.getFlavorPop());
+		findBoard.setFlavorSour(board.getFlavorSour());
+		findBoard.setFlavorSweet(board.getFlavorSweet());
+		
 		findBoard.setComment(board.getComment());
+		findBoard.setScore(board.getScore());
+		findBoard.setDegree(board.getDegree());
+		findBoard.setTag1(board.getTag1());
+		findBoard.setTag2(board.getTag2());
+		findBoard.setTag3(board.getTag3());
 		boardRepo.save(findBoard);
 	}
 

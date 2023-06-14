@@ -62,7 +62,6 @@
 		<div >
 		<div class="row">
 		
-    <p><img th:src="${board.getFileName()}" alt="" /></p>
 </div>
 
 	<div class="row">
@@ -113,6 +112,22 @@
     <div class="col-md-12 mt-4 mb-5">
       <textarea name="comment" class="form-control" style="border:solid 2px black;" th:text="${board.getComment()}"></textarea>
     </div>
+    	<div class="col-md-12 mt-4" >
+		<table display="inline-block">
+
+		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
+		<input type="text" style="font-size:1em; width:120px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag1" th:value="${board.getTag1()}"/>
+		&nbsp;
+
+		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
+		<input type="text" style="font-size:1em; width:120px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag2" th:value="${board.getTag2()}"/>
+		&nbsp;
+
+		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
+		<input type="text" style="font-size:1em; width:120px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag3" th:value="${board.getTag3()}"/>
+
+		</table>
+	</div>
 		<div class="col-md-12" align="center">
 			<br />
 			<a th:href="@{/getBoardList}" class="btn btn-outline-dark">목록가기</a>

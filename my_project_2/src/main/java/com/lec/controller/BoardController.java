@@ -158,7 +158,7 @@ public class BoardController {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
 		}
-		
+/*		
 		// 파일업로드
 		MultipartFile uploadFile = board.getUploadFile();
 
@@ -167,7 +167,7 @@ public class BoardController {
 			uploadFile.transferTo(new File(uploadFolder + fileName));
 			board.setFileName(fileName);
 		}
-		
+*/		
 		board.setMember(member);
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
@@ -187,6 +187,7 @@ public class BoardController {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
 		}
+/*
 		// 파일업로드
 		MultipartFile uploadFile = board.getUploadFile();
 		if(!uploadFile.isEmpty()) {
@@ -194,7 +195,7 @@ public class BoardController {
 			uploadFile.transferTo(new File(uploadFolder + fileName));
 			board.setFileName(fileName);
 		}
-		
+*/		
 		board.setMember(member);
 		boardService.insertBoard(board);
 		return "redirect:getBoardMyList";

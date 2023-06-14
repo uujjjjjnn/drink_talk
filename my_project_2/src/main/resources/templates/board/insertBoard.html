@@ -87,14 +87,25 @@
       <input placeholder="신맛 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorSour" value="" required>
       </div>
     </div>
-
     <div class="col-md-12 mt-2">
       <textarea name="comment" rows="10" class="form-control" placeholder="술술 입력하시酒" style="border:solid 3px black;"></textarea>
     </div>
-		<input type="file" name="uploadFile" />
-		<input type="text" name="tag1"/>
-		<input type="text" name="tag2"/>
-		<input type="text" name="tag3"/>
+	<div class="col-md-12 mt-4" >
+		<table display="inline-block">
+
+		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
+		<input type="text" maxlength="10" style="font-size:1em; width:170px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag1"/>
+		&nbsp;
+
+		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
+		<input type="text" maxlength="10" style="font-size:1em; width:170px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag2"/>
+		&nbsp;
+
+		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
+		<input type="text" maxlength="10" style="font-size:1em; width:170px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag3"/>
+
+		</table>
+	</div>
 		<div class="col-md-12" align="center">
 			<br />
 			<a th:href="@{/getBoardList}" class="btn btn-outline-dark">목록가기</a>
