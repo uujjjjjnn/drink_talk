@@ -27,12 +27,20 @@ public class MemberController {
 	
 	public PagingInfo pagingInfo = new PagingInfo();
 	
+//	@GetMapping("/getMemberInfo")
+//	public String getMemberInfo(Member member, Model model) {
+//		
+//		model.addAttribute("member", member);
+//		return "member/getMemberInfo";
+//	}
+//	
 	@GetMapping("/getMemberInfo")
-	public String getMemberInfo(Member member, Model model) {
-		
-		model.addAttribute("member", member);
-		return "member/getMemberInfo";
+	public String getMemberInfo(Model model, HttpSession session) {
+	    Member member = (Member) session.getAttribute("member");
+	    model.addAttribute("member", member);
+	    return "member/getMemberInfo";
 	}
+
 	
 	@GetMapping("getMemberList")
 	public String getMemberList(Model model,
@@ -103,7 +111,6 @@ public class MemberController {
 //	@GetMapping("updateMember")
 //	public String updateMember(Member member, Model model) {
 //	//	if (member.getMemberId() == null) {
-//	//		System.out.println("=============================================");
 //	//		return "redirect:login";
 //	//	}
 //		model.addAttribute("member", memberService.getMember(member));	

@@ -1,20 +1,26 @@
 <!DOCTYPE html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500&family=Noto+Serif+KR&display=swap');
+.f {
+	font-family: 'Noto Serif KR', serif;
+}
+</style>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">   
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<title>주절..&#127866; 주절...&#128172;</title>
+<title class="f">주절..&#127866; 주절...&#128172;</title>
 </head>
-<body>
+<body class="f">
 	<div class="container" align="center">
 		<form action="insertMember" method="post" >
 		<div style="margin-top:90px;" vertical-align="middle">
 		
 		<div class="wrapper" text-align="center" style="padding-top:50px;width:600px; height:550px; border:solid 3px; border-radius:10%;">
            <div style="height:90px;">
-           <h1>Register In</h1>
+           <h1>함께하시주</h1>
            </div>
            
            <div>
@@ -54,7 +60,7 @@
     </div>  
     -->
     <div class="col-md-12 mb-5">
-      <select name="age" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;">
+      <select name="age" style="font-size:1.28em; width:240px;height:30px;border: none; border-bottom: solid 3px black;">
       <option name="age" th:text="Age" disabled selected></option>
       <option name="age" th:value="20대">20대</option>
       <option name="age" th:value="30대">30대</option>
@@ -70,12 +76,12 @@
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
       <label class="form-check-label" for="invalidCheck2">
-        Are you ready to chat with us?
+        함께 주절주절할 준비 되었주?
       </label>
     </div>
   </div>
   
-   <input style="width:100px;height:50px;font-size:1.3em;border-radius:10%" type="submit" value="Register"/>
+   <input style="width:160px;height:60px;font-size:1.3em;border-radius:10%" type="submit" value="함께하시주"/>
   </div>
 </form>
 	</div>

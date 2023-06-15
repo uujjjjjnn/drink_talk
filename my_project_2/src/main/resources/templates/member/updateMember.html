@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@500&family=Noto+Serif+KR&display=swap');
+.f {
+	font-family: 'Noto Serif KR', serif;
+}
 .a {
 	text-align:center;
 	font-size:1.3em; 
@@ -24,13 +28,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head><title>주절..&#127866; 주절...&#128172;</title>
+</head><title>&#127866;&#128172;&#127866;&#128172;</title>
 </head>
-<body>
+<body class="f">
 <div class="container" th:align="center">
 <div class="mt-4 p-3 mb-3 bg-success text-white rounded">
-	<h3>다같이 주절..<span style="background:none;">&#127866;</span>주절...<span style="background:none;">&#128491;</span></h3>
-	<h5><font class="bg bg-light text-dark" th:text="|${session.member.name}(${session.member.MemberId})|"></font>님 환영하주</h5>
+	<h3>주주총회<span style="background:none;">&#128522;&#128495;</span></h3>
+	<h5><font class="bg bg-light text-dark" th:text="|${session.member.name}(${session.member.MemberId})|"></font>주주님 환영하주</h5>
 </div>
 
 <!-- nav -->
@@ -49,7 +53,7 @@
   </li>
   <th:block th:if="${session.member.memberId=='admin'}">
     <li class="nav-item">
-    <a class="nav-link active" style="color:black;" th:href="@{/getMemberList}">관리자페이지</a>
+    <a class="nav-link active" style="color:black;" th:href="@{/getMemberList}">주주총회</a>
   </li>
   </th:block>
   <li class="nav-item">
@@ -59,15 +63,11 @@
 <!-- nav -->
 <div class="container" align="center">
 	<form action="updateMember" method="post" >			
-			<div style="margin-top:110px;" vertical-align="middle">
+			<div style="margin-top:90px;margin-bottom:90px;" vertical-align="middle">
 			<div class="wrapper" text-align="center" style="padding-top:50px;width:600px; height:500px; border:solid 3px; border-radius:10%;">
-            <div style="height:80px;">
+            <div style="height:90px;">
 			<h1>&#127866; <font color="green" th:text="|${member.name}(${member.memberId})|"></font> &#127866;</h1>
-            </div>
-		<!-- 	<h5><font class="bg bg-danger" th:text="|${session['member'].name}(${session.member.id})|"></font>님 환영합니다!!</h5>  -->
-		
-	
-	
+            </div>	
            <div >
     <div class="col-md-8 mb-2">
       <input type="text" class="a" name="memberId" th:value="${ member.getMemberId() }" readonly>
@@ -79,19 +79,31 @@
       <input type="text" class="a" name="name" th:value="${ member.getName() }" >
     </div>
     <div class="col-md-8 mb-2">
-      <input type="text" class="a" name="gender" th:value="${ member.getGender() }" >
+               <select name="gender" class="a">
+      <option th:text="${ session.member.getGender() }" disabled ></option>
+      <option th:value="FEMALE">FEMALE</option>
+      <option th:value="MALE">MALE</option>
+      </select>
     </div>
-    <div class="col-md-8 mb-4">
-      <input type="text" class="a" name="age" th:value="${ member.getAge() }" >
+    <div class="col-md-8 mb-5">
+                    <select name="age" class="a">
+      <option name="age" th:text="${session.member.getAge()}" disabled ></option>
+      <option name="age" th:value="20대">20대</option>
+      <option name="age" th:value="30대">30대</option>
+      <option name="age" th:value="40대">40대</option>
+      <option name="age" th:value="50대">50대</option>
+      <option name="age" th:value="기타">기타</option>
+      </select>
     </div>
  </div>   
 
-  <div class="col-md-12 mt-3">
-  <a th:href="@{/getMemberList}" class="btn btn-outline-dark">회원목록</a>
-  <input type="submit" class="btn btn-outline-warning" value="회원수정" />
-  <a th:href="@{/deleteMember(memberId=${member.memberId})}" class="btn btn-outline-danger">회원삭제</a>
+  <div class="col-md-12 mt-5">
+  <a th:href="@{/getMemberList}" class="btn btn-outline-dark">주주총회</a>&nbsp;&nbsp;
+  <input type="submit" class="btn btn-outline-warning" value="수정하주" />&nbsp;&nbsp;
+  <a th:href="@{/deleteMember(memberId=${member.memberId})}" class="btn btn-outline-danger">삭제하주</a>
   </div>
 </form>
 	</div>
+    </div>
 </body>
 </html>
