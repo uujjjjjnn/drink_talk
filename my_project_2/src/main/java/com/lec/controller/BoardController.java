@@ -157,17 +157,7 @@ public class BoardController {
 	public String insertBoard(@ModelAttribute("member") Member member, Board board) throws IOException {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
-		}
-/*		
-		// 파일업로드
-		MultipartFile uploadFile = board.getUploadFile();
-
-		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File(uploadFolder + fileName));
-			board.setFileName(fileName);
-		}
-*/		
+		}	
 		board.setMember(member);
 		boardService.insertBoard(board);
 		return "redirect:getBoardList";
@@ -186,16 +176,7 @@ public class BoardController {
 	public String insertBoardMy(@ModelAttribute("member") Member member, Board board) throws IOException {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
-		}
-/*
-		// 파일업로드
-		MultipartFile uploadFile = board.getUploadFile();
-		if(!uploadFile.isEmpty()) {
-			String fileName = uploadFile.getOriginalFilename();
-			uploadFile.transferTo(new File(uploadFolder + fileName));
-			board.setFileName(fileName);
-		}
-*/		
+		}		
 		board.setMember(member);
 		boardService.insertBoard(board);
 		return "redirect:getBoardMyList";

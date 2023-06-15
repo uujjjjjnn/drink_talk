@@ -1,5 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<style>
+.a {
+	font-size:1.3em; 
+	width:240px;
+	height:30px;
+	border: none; 
+	border-bottom: solid 3px black;
+	text-align: center;
+}
+.l {
+	width:100px;
+	background:none;
+	text-align:right;
+	color:gray;
+}
+.r {
+	width:90px;
+	background:none;
+	text-align:left;
+}
+.tag {
+	font-size:1em; 
+	width:15px;
+	height:20px;
+	border: none; 
+	border-bottom: solid 3px black; 
+	color:gray; 
+}
+.tagValue {
+	font-size:1em; 
+	width:170px;
+	height:20px;
+	border: none; 
+	border-bottom: solid 3px black; 
+	color:gray;
+}
+</style>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,13 +82,13 @@
 <!-- nav -->
 
 <div class="container" align="center">
-	<form th:action="insertBoard" method="post">
+	<form th:action="insertBoardMy" method="post">
 		<input type="hidden" name="memberId" class="form-control" th:value="${session.member.memberId}">
 		<div class="wrapper" text-align="center" style="padding-top:60px;">
 		<div >
       <div class="row">
       <div class="col-md-3 mb-4">
-      <select name="type" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;">
+      <select name="type" class="a" required>
       <option name="type" th:text="주종" disabled selected></option>
       <option name="type" th:value="맥주">맥주</option>
       <option name="type" th:value="막걸리">막걸리</option>
@@ -60,36 +97,74 @@
       <option name="type" th:value="기타">기타</option>
       </select>
 		</div>
-	  <div class="col-md-3 ">
-      <input placeholder="상품명" type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="itemName" value="" required>
+	  <div class="col-md-3 mb-5">
+      <input placeholder="상품명" type="text" class="a" name="itemName" value="" required>
     </div>
-     <div class="col-md-3 ">
-      <input placeholder="도수" type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="degree" value="" required>
+     <div class="col-md-3 mb-5">
+     <table>
+      <input type="text" class="a" style="width:150px;text-align:right" name="degree" value="" required>
+    	<input type="text" class="a r" style="width:90px" value=" %" disabled/>
+     </table>
     </div>
-     <div class="col-md-3 ">
-      <input placeholder="만족도 (0~5)" type="text" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="score" value="" required>
+     <div class="col-md-3 mb-5">
+        <table>
+        <input type="text" class="a l"  style="width:110px"value="만족도 : " disabled/>
+      <input type="text" class="a" style="width:40px" name="score" value="" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+     </table>
     </div>
 		</div>
 		
 	  <div class="row">
       
     <div class="col-md-3 mb-5">
-      <input placeholder="단맛 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorSweet" value="" required>
+        <table display="inline-block">
+    	<input type="text" class="a l"  value="단맛 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorSweet" value="" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
     </div>
     <div class="col-md-3 mb-5">
-      <input placeholder="청량감 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorPop" value="" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="탄산 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorPop" value="" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
     </div>
       
     <div class="col-md-3 mb-5">
-      <input placeholder="바디감 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorBody" value="" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="바디 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorBody" value="" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
     </div>
     <div class="col-md-3 mb-5">
-      <input placeholder="신맛 (0~5)" type="number" step="0.1" min="0" max="5" style="font-size:1.3em; width:240px;height:30px;border: none; border-bottom: solid 3px black;" name="flavorSour" value="" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="신맛 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorSour" value="" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
       </div>
     </div>
-
     <div class="col-md-12 mt-2">
-      <textarea name="comment" rows="10" class="form-control" placeholder="술술 입력하시주" style="border:solid 3px black;"></textarea>
+      <textarea name="comment" rows="10" class="form-control" placeholder="술술 입력하시酒" style="border:solid 3px black;"></textarea>
+    </div>
+	<div class="col-md-12 mt-4" >
+		<table display="inline-block">
+
+		<input type="text" class="tag" value="#" disabled/>
+		<input type="text" maxlength="10" class="tagValue" name="tag1"/>
+		&nbsp;
+
+		<input type="text" class="tag" value="#" disabled/>
+		<input type="text" maxlength="10" class="tagValue" name="tag2"/>
+		&nbsp;
+
+		<input type="text" class="tag" value="#" disabled/>
+		<input type="text" maxlength="10" class="tagValue" name="tag3"/>
+
+		</table>
     </div>
 		
 		<div class="col-md-12" align="center">

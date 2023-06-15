@@ -9,6 +9,33 @@
 	border-bottom: solid 3px black;
 	text-align: center;
 }
+.l {
+	width:100px;
+	background:none;
+	text-align:right;
+}
+.r {
+	width:90px;
+	background:none;
+	text-align:left;
+}
+.tag {
+	font-size:1em; 
+	width:15px;
+	height:20px;
+	border: none; 
+	border-bottom: solid 3px black; 
+	background:none;
+	color:gray; 
+}
+.tagValue {
+	font-size:1em; 
+	width:170px;
+	height:20px;
+	border: none; 
+	border-bottom: solid 3px black; 
+	color:gray;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -56,7 +83,7 @@
 <!-- nav -->
 
 <div class="container mt-4 ml-auto mr-auto">
-	<form th:action="@{/updateBoard}" method="post" enctype="multipart/form-data">
+	<form th:action="@{/updateBoard}" method="post" >
 		<input type="hidden" name="seq" class="form-control" th:value="${board.seq}">
 		<div class="wrapper" text-align="center" style="padding-top:50px;">
 		<div >
@@ -85,27 +112,50 @@
       <input type="text" class="a" name="itemName" th:attr="value=${board.getItemName()}" readonly>
     </div>
      <div class="col-md-3 ">
-      <input type="text" class="a" name="degree" th:attr="value=${board.getDegree() + ' %'}" required>
+     <table>
+      <input type="text" class="a" style="width:150px;" name="degree" th:value="${board.getDegree()}" required>
+    	<input type="text" class="a r" style="width:90px" value=" %" disabled/>
+     </table>
     </div>
      <div class="col-md-3 ">
-      <input type="text" class="a" name="score" th:attr="value='만족도 : ' + ${board.getScore()} + ' / 5'" required>
+     <table>
+        <input type="text" class="a l"  style="width:110px"value="만족도 : " disabled/>
+      <input type="text" class="a" style="width:40px" name="score" th:value="${board.getScore()}" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+     </table>
     </div>
 		</div>
 
   <div class="row">
       
     <div class="col-md-3 mb-5">
-      <input type="text" class="a" name="flavorSweet" th:attr="value='단맛 : ' + ${board.getFlavorSweet()} + ' /5'" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="단맛 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorSweet" th:value="${board.getFlavorSweet()}" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
     </div>
     <div class="col-md-3 mb-5">
-      <input type="text" class="a" name="flavorPop" th:attr="value='청량감 : ' + ${board.getFlavorPop()} + ' /5'" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="탄산 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorPop" th:value="${board.getFlavorPop()}" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
     </div>
       
     <div class="col-md-3 mb-5">
-      <input type="text" class="a" name="flavorBody" th:attr="value='바디감 : ' + ${board.getFlavorBody()} + ' /5'" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="바디 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorBody" th:value="${board.getFlavorBody()}" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
     </div>
     <div class="col-md-3 mb-5">
-      <input type="text" class="a" name="flavorSour" th:attr="value='신맛 : ' + ${board.getFlavorSour()} + ' /5'" required>
+    <table display="inline-block">
+    	<input type="text" class="a l"  value="신맛 : " disabled/>
+      <input type="text" class="a" style="width:50px" name="flavorSour" th:value="${board.getFlavorSour()}" required>
+    	<input type="text" class="a r" value=" / 5" disabled/>
+    </table>
       </div>
     </div>
 
@@ -115,16 +165,16 @@
     	<div class="col-md-12 mt-4" >
 		<table display="inline-block">
 
-		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
-		<input type="text" style="font-size:1em; width:120px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag1" th:value="${board.getTag1()}"/>
+		<input type="text" class="tag" value="#" disabled/>
+		<input type="text" class="tagValue" name="tag1" th:value="${board.getTag1()}"/>
 		&nbsp;
 
-		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
-		<input type="text" style="font-size:1em; width:120px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag2" th:value="${board.getTag2()}"/>
+		<input type="text" class="tag" value="#" disabled/>
+		<input type="text" class="tagValue" name="tag2" th:value="${board.getTag2()}"/>
 		&nbsp;
 
-		<input type="text" style="font-size:1em; width:15px;height:20px;border: none; border-bottom: solid 3px black; color:gray" value="#" disabled/>
-		<input type="text" style="font-size:1em; width:120px;height:20px;border: none; border-bottom: solid 3px black; color:gray" name="tag3" th:value="${board.getTag3()}"/>
+		<input type="text" class="tag" value="#" disabled/>
+		<input type="text" class="tagValue" name="tag3" th:value="${board.getTag3()}"/>
 
 		</table>
 	</div>

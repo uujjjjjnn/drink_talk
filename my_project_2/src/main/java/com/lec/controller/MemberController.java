@@ -1,5 +1,7 @@
 package com.lec.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +30,7 @@ public class MemberController {
 	@GetMapping("/getMemberInfo")
 	public String getMemberInfo(Member member, Model model) {
 		
+		model.addAttribute("member", member);
 		return "member/getMemberInfo";
 	}
 	
@@ -97,23 +100,84 @@ public class MemberController {
 		return "forward:getMemberList";		
 	}
 
+//	@GetMapping("updateMember")
+//	public String updateMember(Member member, Model model) {
+//	//	if (member.getMemberId() == null) {
+//	//		System.out.println("=============================================");
+//	//		return "redirect:login";
+//	//	}
+//		model.addAttribute("member", memberService.getMember(member));	
+//		return "member/updateMember";
+//	}
+//	
+//	@PostMapping("updateMember")
+//	public String updateMember(Member member) {
+//		if (member.getMemberId() == null) {
+//			return "redirect:login";
+//		}
+//		memberService.updateMember(member);	
+//		return "redirect:getMemberList?curPage=" + pagingInfo.getCurPage() + "&rowSizePerPage=" + pagingInfo.getRowSizePerPage()
+//		                           + "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
+//	}	
 	@GetMapping("updateMember")
-	public String updateMember(Member member, Model model) {
-	//	if (member.getMemberId() == null) {
-	//		System.out.println("=============================================");
-	//		return "redirect:login";
-	//	}
-		model.addAttribute("member", memberService.getMember(member));	
+	public String updateMember(HttpSession session, Model model) {
+		//	if (member.getMemberId() == null) {
+		//		System.out.println("=============================================");
+		//		return "redirect:login";
+		//	}
+		Member member = (Member) session.getAttribute("member");
+	    model.addAttribute("member", member);
 		return "member/updateMember";
 	}
 	
 	@PostMapping("updateMember")
-	public String updateMember(Member member) {
+	public String updateMember(Member member, HttpSession session) {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
 		}
 		memberService.updateMember(member);	
+		session.setAttribute("member", member);
 		return "redirect:getMemberList?curPage=" + pagingInfo.getCurPage() + "&rowSizePerPage=" + pagingInfo.getRowSizePerPage()
-		                           + "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
+		+ "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
 	}	
+//	
+//	@GetMapping("updateMemberMy")
+//	public String updateMemberMy(Member member, Model model) {
+//		//	if (member.getMemberId() == null) {
+//		//		System.out.println("=============================================");
+//		//		return "redirect:login";
+//		//	}
+//		model.addAttribute("member", memberService.getMember(member));	
+//		return "member/getMemberInfo";
+//	}
+//	
+//	@PostMapping("updateMemberMy")
+//	public String updateMemberMyMy(Member member) {
+//		if (member.getMemberId() == null) {
+//			return "redirect:login";
+//		}
+//		memberService.updateMember(member);	
+//		return "redirect:getMemberInfo";
+//	}	
+	
+	@GetMapping("updateMemberMy")
+	public String updateMemberMy(Model model, HttpSession session) {
+	    Member member = (Member) session.getAttribute("member");
+	    model.addAttribute("member", member);
+	    return "member/getMemberInfo";
+	}
+
+	@PostMapping("updateMemberMy")
+	public String updateMemberMy(Member member, HttpSession session) {
+	    if (member.getMemberId() == null) {
+	        return "redirect:login";
+	    }
+	    memberService.updateMember(member);
+	    
+	    // Update the member object in the session
+	    session.setAttribute("member", member);
+	    
+	    return "redirect:getMemberInfo";
+	}
+
 }
