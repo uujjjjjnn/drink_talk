@@ -57,7 +57,7 @@
 <body class="f">
 <div class="container" th:align="center">
 <div class="mt-4 p-3 mb-3 bg-success text-white rounded">
-	<h3>주주총회<span style="background:none;">&#128522;&#128495;</span></h3>
+	<h3>酒절酒절<span style="background:none;">&#128522;&#128495;</span></h3>
 	<h5><font class="bg bg-light text-dark" th:text="|${session.member.name}(${session.member.MemberId})|"></font>주주님 환영하주</h5>
 </div>
 
@@ -87,7 +87,9 @@
 <!-- nav -->
 
 <div class="container mt-4 ml-auto mr-auto">
-	<form action="getMemberList" method="get">
+	<form action="getMemberList" method="get" id="boardForm">
+	<input type="hidden" id="curPage" name="curPage"  th:value="0">
+			<input type="hidden" id="rowSizePerPage" name="rowSizePerPage" th:value="${rp}">
 	<div class="row mt-3 justify-content-center">
 		<div class="col-auto me-1 mt-3 mb-2">
 			<select class="a" name="searchType" id="searchType" style="width:120px">
@@ -146,17 +148,17 @@
 		<div class="col"></div>
 		<ul class="col-10 btn-sm pagination justify-content-center" >	
 				<th:block th:if="${sp != 1 }">
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=0, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk"><i class="fas fa-fast-backward"></i></a></li>
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=${sp-ps}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-backward"></i></a></li>				
+					<li class="page-item"><a th:href="@{/getMemberList(curPage=0, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk"><i class="fas fa-fast-backward"></i></a></li>
+					<li class="page-item"><a th:href="@{/getMemberList(curPage=${sp-ps}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-backward"></i></a></li>				
 				</th:block>
 				
  				<th:block th:each="page : ${#numbers.sequence(pagingInfo.getStartPage(), pagingInfo.getEndPage())}">
-					<li class="page-item" th:classappend="${(page-1)==pagingInfo.getCurPage() ? 'active' : ''}"><a class="page-linkk" th:href="@{/getBoardList(curPage=${page-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" th:text="${page}"  ></a></li>
+					<li class="page-item" th:classappend="${(page-1)==pagingInfo.getCurPage() ? 'active' : ''}"><a class="page-linkk" th:href="@{/getMemberList(curPage=${page-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" th:text="${page}"  ></a></li>
 				</th:block>	
 				
 				<th:block th:if="${ ep lt tp }">
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=${ep}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-forward"></i></a></li>				
-					<li class="page-item"><a th:href="@{/getBoardList(curPage=${tp-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-fast-forward"></i></a></li>				
+					<li class="page-item"><a th:href="@{/getMemberList(curPage=${ep}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-forward"></i></a></li>				
+					<li class="page-item"><a th:href="@{/getMemberList(curPage=${tp-1}, rowSizePerPage=${rp}, searchType=${st}, searchWord=${sw})}" class="page-linkk "><i class="fas fa-fast-forward"></i></a></li>				
 				</th:block>	
 			</ul> <!-- pagination -->
 			

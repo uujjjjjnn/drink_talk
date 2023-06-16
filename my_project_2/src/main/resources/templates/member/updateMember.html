@@ -33,7 +33,7 @@
 <body class="f">
 <div class="container" th:align="center">
 <div class="mt-4 p-3 mb-3 bg-success text-white rounded">
-	<h3>주주총회<span style="background:none;">&#128522;&#128495;</span></h3>
+	<h3>酒절酒절<span style="background:none;">&#128522;&#128495;</span></h3>
 	<h5><font class="bg bg-light text-dark" th:text="|${session.member.name}(${session.member.MemberId})|"></font>주주님 환영하주</h5>
 </div>
 
@@ -80,14 +80,14 @@
     </div>
     <div class="col-md-8 mb-2">
                <select name="gender" class="a">
-      <option th:text="${ session.member.getGender() }" disabled ></option>
+      <option th:text="${ member.getGender() }" selected ></option>
       <option th:value="FEMALE">FEMALE</option>
       <option th:value="MALE">MALE</option>
       </select>
     </div>
     <div class="col-md-8 mb-5">
                     <select name="age" class="a">
-      <option name="age" th:text="${session.member.getAge()}" disabled ></option>
+      <option name="age" th:text="${member.getAge()}" selected ></option>
       <option name="age" th:value="20대">20대</option>
       <option name="age" th:value="30대">30대</option>
       <option name="age" th:value="40대">40대</option>

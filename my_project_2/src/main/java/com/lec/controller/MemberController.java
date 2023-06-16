@@ -108,45 +108,45 @@ public class MemberController {
 		return "forward:getMemberList";		
 	}
 
-//	@GetMapping("updateMember")
-//	public String updateMember(Member member, Model model) {
-//	//	if (member.getMemberId() == null) {
-//	//		return "redirect:login";
-//	//	}
-//		model.addAttribute("member", memberService.getMember(member));	
-//		return "member/updateMember";
-//	}
-//	
-//	@PostMapping("updateMember")
-//	public String updateMember(Member member) {
-//		if (member.getMemberId() == null) {
-//			return "redirect:login";
-//		}
-//		memberService.updateMember(member);	
-//		return "redirect:getMemberList?curPage=" + pagingInfo.getCurPage() + "&rowSizePerPage=" + pagingInfo.getRowSizePerPage()
-//		                           + "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
-//	}	
 	@GetMapping("updateMember")
-	public String updateMember(HttpSession session, Model model) {
-		//	if (member.getMemberId() == null) {
-		//		System.out.println("=============================================");
-		//		return "redirect:login";
-		//	}
-		Member member = (Member) session.getAttribute("member");
-	    model.addAttribute("member", member);
+	public String updateMember(Member member, Model model) {
+	//	if (member.getMemberId() == null) {
+	//		return "redirect:login";
+	//	}
+		model.addAttribute("member", memberService.getMember(member));	
 		return "member/updateMember";
 	}
 	
 	@PostMapping("updateMember")
-	public String updateMember(Member member, HttpSession session) {
+	public String updateMember(Member member) {
 		if (member.getMemberId() == null) {
 			return "redirect:login";
 		}
 		memberService.updateMember(member);	
-		session.setAttribute("member", member);
 		return "redirect:getMemberList?curPage=" + pagingInfo.getCurPage() + "&rowSizePerPage=" + pagingInfo.getRowSizePerPage()
-		+ "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
+		                           + "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
 	}	
+//	@GetMapping("updateMember")
+//	public String updateMember(HttpSession session, Model model) {
+//		//	if (member.getMemberId() == null) {
+//		//		System.out.println("=============================================");
+//		//		return "redirect:login";
+//		//	}
+//		Member member = (Member) session.getAttribute("member");
+//	    model.addAttribute("member", member);
+//		return "member/updateMember";
+//	}
+//	
+//	@PostMapping("updateMember")
+//	public String updateMember(Member member, HttpSession session) {
+//		if (member.getMemberId() == null) {
+//			return "redirect:login";
+//		}
+//		memberService.updateMember(member);	
+//		session.setAttribute("member", member);
+//		return "redirect:getMemberList?curPage=" + pagingInfo.getCurPage() + "&rowSizePerPage=" + pagingInfo.getRowSizePerPage()
+//		+ "&searchType=" + pagingInfo.getSearchType() + "&searchWord=" + pagingInfo.getSearchWord();
+//	}	
 //	
 //	@GetMapping("updateMemberMy")
 //	public String updateMemberMy(Member member, Model model) {

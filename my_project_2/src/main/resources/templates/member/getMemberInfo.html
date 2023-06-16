@@ -38,6 +38,7 @@
   <div class="container" align="center">
   <div class="mt-4 p-3 mb-3"></div>
     <form th:action="updateMemberMy" method="post">
+    
       <div style="margin-top: 110px;margin-bottom:110px;" vertical-align="middle">
         <div class="wrapper" text-align="center" style="padding-top: 50px; width: 600px; height: 500px; border: solid 3px; border-radius: 10%;">
           <div style="height: 80px;">
@@ -79,8 +80,9 @@
                 <a th:href="getBoardList" style="display: inline-block; text-decoration: none; color: green"><strong>다같이<br>주절주절</strong></a>
               </div>
               <th:block th:if="${session.member.memberId=='admin'}">
+              &nbsp;
                 <div class="b" margin-right="30px">
-                 &nbsp;&nbsp; <a th:href="@{/getMemberList}" style="display: inline-block; text-decoration: none; color: green"><strong>주주<br />총회</strong></a>
+                  <a th:href="@{/getMemberList}" style="display: inline-block; text-decoration: none; color: green"><strong>주주<br />총회</strong></a>
                 </div>
               </th:block>
             </div>
