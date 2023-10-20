@@ -62,8 +62,4 @@ public class Board {
 		member.getBoardList().add(this);
 	}
 	
-	@OneToOne
-	@JoinColumn(name="flavor_id", nullable = false, updatable = false)
-	private Detail detail;
-	
 }
