@@ -40,12 +40,7 @@ public class Board {
 	
 	@Column(insertable = false, updatable = false, columnDefinition = "bigint default 0")
 	private Long cnt;
-/*	
-	private String fileName;
-	
-	@Transient
-	private MultipartFile uploadFile;	
-*/	
+
 	@Column(columnDefinition = "VARCHAR(10) default ''")
 	private String tag1;
 	@Column(columnDefinition = "VARCHAR(10) default ''")

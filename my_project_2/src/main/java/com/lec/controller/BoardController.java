@@ -50,9 +50,6 @@ public class BoardController {
 	public PagingInfo pagingInfo = new PagingInfo();
 	public PagingInfo pagingInfo2 = new PagingInfo();
 	
-//	@Value("${path.upload}")
-//	public String uploadFolder;
-	
 	@ModelAttribute("member")
 	public Member setMember() {
 		return new Member();
